@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+Welcome to ABC College Store where you can buy different items...
+{% endblock %}
+{% block title %}
+Success - ABC College Store
+{% endblock %}
+
+{% block content %}
+<div id="order" class="container">
+    <div class="card border-0 shadow-sm mx-auto" style="width: 600px; margin-top: 20px;">
+        <div class="card-body">
+            <h3 class="card-title text-success">Order Placed Successfully!</h3>
+            <p><a href="/">Go to Homepage</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

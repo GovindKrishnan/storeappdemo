@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% if category %}
+{{category.description|truncatewords:155 }}
+{% else %}
+Welcome to ABC College Store where you can buy different items...
+{% endif %}
+{% endblock %}
+{% block title %}
+Register - ABC College Store
+{% endblock %}
+{% block content %}
+<div id="register" class="container">
+    <div class="card border-0 shadow-sm mx-auto" style="width: 400px; margin-top: 20px;">
+        <div class="card-body">
+            <h3 class="card-title">Register</h3>
+            <form method="post" action="register">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control form-control-sm" id="username" name="username"
+                           placeholder="Enter your username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control form-control-sm" id="password" name="password"
+                           placeholder="Enter your password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control form-control-sm" id="confirm_password"
+                           name="password1" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Register</button>
+                <br><br>
+                Already has account? <a href="/login" class="btn btn-link btn-sm">Login</a>
+            </form>
+            {% for msg in messages %}
+            <h3>{{msg}}</h3>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<style>
+    #register {
+        max-width: 600px;
+        margin-top: 20px;
+    }
+
+
+</style>
+
+
+{% endblock %}

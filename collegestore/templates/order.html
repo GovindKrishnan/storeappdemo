@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+Welcome to ABC College Store where you can buy different items...
+{% endblock %}
+{% block title %}
+Order - ABC College Store
+{% endblock %}
+
+{% block content %}
+<div id="order" class="container">
+    <div class="card border-0 shadow-sm mx-auto" style="width: 600px; margin-top: 20px;">
+        <div class="card-body">
+            <h3 class="card-title">Make Purchase</h3>
+            <div id="intro">
+                <button type="button" class="btn btn-primary btn-sm" id="submit-form">Make Purchase</button>
+            </div>
+            <form id="form" action="success" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Name</label>
+                    <input type="text" class="form-control form-control-sm" id="username" name="username"
+                           placeholder="Enter your name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control form-control-sm" id="dob" name="dob" required>
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" class="form-control form-control-sm" id="age" name="age" required>
+                </div>
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select class="form-control form-control-sm" id="gender" name="gender">
+                        <option value="" selected disabled>Select an Option</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="phone_number" class="form-label">Phone Number</label>
+                    <input type="number" class="form-control form-control-sm" id="phone_number" name="phone_number"
+                           placeholder="Enter your phone number" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mail_id" class="form-label">Mail ID</label>
+                    <input type="email" class="form-control form-control-sm" id="mail_id" name="mail_id"
+                           placeholder="Enter your email id" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea class="form-control form-control-sm" id="address" name="address"
+                              placeholder="Enter your address" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="department" class="form-label">Department</label>
+                    <select class="form-control form-control-sm" id="department" name="department">
+                        <option value="" selected disabled>Select an Option</option>
+                        <option value="commerce">Commerce</option>
+                        <option value="science">Science</option>
+                        <option value="arts">Arts</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="courses" class="form-label">Courses</label>
+                    <select class="form-control form-control-sm" id="courses" name="courses" disabled>
+                        <option value="" selected disabled>Select a Department First</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="purpose" class="form-label">Purpose</label>
+                    <select class="form-control form-control-sm" id="purpose" name="purpose">
+                        <option value="" selected disabled>Select an Option</option>
+                        <option value="enquiry">Enquiry</option>
+                        <option value="place_order">Place Order</option>
+                        <option value="return">Return</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <h5>Materials Provided</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="materials_1" name="materials[]"
+                               value="notebook">
+                        <label class="form-check-label" for="materials_1">Debit Notebook</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="materials_2" name="materials[]"
+                               value="pen">
+                        <label class="form-check-label" for="materials_2">Pen</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="materials_3" name="materials[]"
+                               value="exam_peppers">
+                        <label class="form-check-label" for="materials_3">Exam Papers</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="materials_4" name="materials[]"
+                               value="sticky notes">
+                        <label class="form-check-label" for="materials_5">Sticky Notes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="materials_5" name="materials[]"
+                               value="highlighters">
+                        <label class="form-check-label" for="materials_4">Highlighters</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                <a href="logout" class="btn btn-dark btn-sm">Logout</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $("#form").toggle();
+    $("#submit-form").click(function() {
+        $("#form").toggle();
+        $("#intro").hide();
+    });
+
+    const coursesByDepartment = {
+        commerce: ['BBA','MBA', 'BCom', 'MCom'],
+        science: ['BSc Physics', 'MSc Physics', 'BSc Biology', 'MSc Biology'],
+        arts: ['History', 'English', 'Humanities']
+    };
+
+    $('#department').change(function () {
+        const selectedDepartment = $(this).val();
+        const coursesDropdown = $('#courses');
+        coursesDropdown.empty();
+        const defaultOption = $('<option>').val('').text('Select a Course').prop('selected', true).prop('disabled', true);
+        coursesDropdown.append(defaultOption);
+        if (selectedDepartment in coursesByDepartment) {
+            for (const course of coursesByDepartment[selectedDepartment]) {
+                const option = $('<option>').val(course).text(course);
+                coursesDropdown.append(option);
+            }
+            coursesDropdown.prop('disabled', false);
+        } else {
+            coursesDropdown.prop('disabled', true);
+        }
+    });
+});
+
+</script>
+{% endblock %}

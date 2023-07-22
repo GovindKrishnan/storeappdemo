@@ -1,0 +1,30 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E501" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="travelapp.models.Place.objects" />
+          <option value="travelapp.models.Team.*" />
+          <option value="todoapp.models.Task.*" />
+          <option value="shop.models.Product.*" />
+          <option value="shop.models.Category.*" />
+          <option value="django.db.models.fields.related.ForeignKey.*" />
+          <option value="cart.models.Cart.objects" />
+          <option value="cart.models.Cart.DoesNotExist" />
+          <option value="cart.models.CartItem.DoesNotExist" />
+          <option value="cart.models.CartItem.*" />
+          <option value="cart.views.*" />
+          <option value="restapp.models.Task.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

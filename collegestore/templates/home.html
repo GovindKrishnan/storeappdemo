@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% if category %}
+{{category.description|truncatewords:155 }}
+{% else %}
+Welcome to ABC College Store where you can buy different items...
+{% endif %}
+{% endblock %}
+{% block title %}
+ABC College Store
+{% endblock %}
+{% block content %}
+
+<div>
+    <img class="my_image my_image_padding" src="{% static 'img/banner.jpg' %}" height="400" width="1300"
+         alt="Our Products">
+    {% if not user.is_authenticated %}
+        <a href="login"><button class="btn btn-primary">Login to Shop</button></a>
+    {% endif %}
+</div>
+<br>
+<div>
+    <h1 class="my_title text-center">Our Products Collections</h1>
+    <p class="text-justify">At ABC College Store, we offer a wide variety of products to meet the needs of our students.
+        Whether you're looking for textbooks, school supplies, or apparel, we have you covered. We also offer a variety
+        of gift items, so you can find the perfect present for your friends and family.</p>
+    <p class="text-justify">We're committed to providing our students with the best possible shopping experience. That's
+        why we offer free shipping on orders over $50, and we have a generous return policy. So if you're not happy with
+        your purchase, you can return it for a full refund.</p>
+</div>
+
+<div>
+    <img class="my_image my_image_padding"
+         src="https://images.newindianexpress.com/uploads/user/imagelibrary/2019/9/5/w900X450/MOM.jpg?w=400&dpr=2.6"
+         height="400" width="1300"
+         alt="Our Products">
+</div>
+<br>
+{% endblock %}
